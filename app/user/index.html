@@ -1,13 +1,22 @@
-<ion-view view-title="我">
+<ion-view view-title="我" >
+  <ion-nav-buttons side="right">
+    <button class="button  button-clear" ui-sref="setting"
+            nav-transition="ios" nav-direction="forward">
+      <i class="icon ion-ios-gear-outline"></i>
+    </button>
+  </ion-nav-buttons>
   <ion-content class="user">
    <div class="list padding-vertical">
      <a class="item item-thumbnail-left item-icon-right"
-        style="padding-left: 85px;font-size: 15px;" href="#">
+        style="padding-left: 85px;font-size: 15px;"
+       ui-sref="info"  nav-transition="ios" nav-direction="forward">
        <img src="public/img/ionic.png">
-       <div class="row row-center responsive-sm nb-text-overflow">
+       <div class="row row-center  nb-text-overflow">
          <div class="col" style="margin-bottom: 0px;">
            tom
          </div>
+       </div>
+       <div class="row row-center  nb-text-overflow">
          <div class="col" style="margin-bottom: 0px;font-size: 10px;">
            邮箱:834575477775@qq.com
          </div>

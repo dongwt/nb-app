@@ -3,7 +3,8 @@
  */
 define([
     //路由配置
-    'routes/main-route'
+    'routes/main-route',
+    'routes/user-route'
   ],
   {
     'timeout': 5000,//连接超时设置
