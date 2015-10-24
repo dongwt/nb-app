@@ -17,6 +17,14 @@ define(['app'],
 
 
           $stateProvider
+            .state('register', {//注册路由
+              url: "/user/register",
+              templateUrl: "app/user/register/register.html"
+            })
+            .state('login', {//登录路由
+              url: "/user/login",
+              templateUrl: "app/user/login/login.html"
+            })
             .state('setting', {//设置路由
               url: "/user/setting",
               templateUrl: "app/user/setting/setting.html",

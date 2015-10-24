@@ -16,7 +16,7 @@ define(['app'],
           };
 
           //1.默认路由跳转
-          $urlRouterProvider.otherwise("tabs/user");
+          $urlRouterProvider.otherwise("user/login");
 
           //.state('tabs', {//框架布局路由
           //  url: "/tabs",

@@ -41,3 +41,29 @@ body {
 }
 
 /**end 用户信息**/
+
+
+/**start 登录**/
+.login{
+
+}
+
+.login .left-icon{
+  font-size: 30px;
+}
+/**end 登录**/
+
+/**start 注册**/
+.register{
+
+}
+
+.register .left-icon{
+  font-size: 30px;
+}
+
+.register .right-icon{
+  font-size: 30px;
+  padding: 0px;
+}
+/**end 注册**/
