@@ -1,7 +1,7 @@
 /**
  * 项目的初始化配置
  */
-define(['public/js/app'], function (app) {
+define(['app'], function (app) {
 
   /**
    * ionic 的配置
@@ -30,10 +30,10 @@ define(['public/js/app'], function (app) {
   /**
    * 路由状态的控制
    */
-  app.run([ '$rootScope',function ($rootScope) {
+  app.run([ '$rootScope','InjectorFactory',function ($rootScope,InjectorFactory) {
 
       //获取基本的依赖服务,并放置于$rootScope下
-      //angular.extend($rootScope,InjectorFactory.getDependence(InjectorFactory.BASE_DEPENDENCE));
+      angular.extend($rootScope,InjectorFactory.getDependence(InjectorFactory.BASE_DEPENDENCE));
 
       //控制路由跳转
       $rootScope.$on('$stateChangeStart',

@@ -28,7 +28,7 @@ require.config({
 
 var nbConfig = "";//全局的配置信息
 
-require(['angular','public/js/app','config/config','public/js/app-init'], function (angular,app,config) {
+require(['angular','app','config/config','app-init'], function (angular,app,config) {
 
     nbConfig = config;
 

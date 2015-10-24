@@ -1,7 +1,7 @@
 /**
  * 主路由配置
  */
-define(['public/js/app'],
+define(['app'],
   function (app) {
     app.registerProvider(
       'main-route',

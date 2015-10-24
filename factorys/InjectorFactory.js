@@ -8,7 +8,6 @@ define(['app'], function (app) {
       /**常量定义**/
       var IONIC_DEPENDENCE = "ionic_dependence";//ionic所有依赖
       var CORDOVA_DEPENDENCE = "cordova_dependence";//cordova所有依赖
-      var BBLR_DEPENDENCE = "bblr_dependence";//bblr所有依赖
       var BASE_DEPENDENCE = "base_dependence";//项目基础依赖
 
 
@@ -28,19 +27,13 @@ define(['app'], function (app) {
         "$cordovaGeolocation", "$cordovaNetwork"
       ];
 
-      //bblr所有依赖
-      var bblrDependence = [
-        "AppVersionFactory", "BaseFactory", "ContactFactory", "MapFactory", "HttpFactory",
-        "LoginFactory", "NoticeFactory", "LoadingFactory", "CacheFactory", "CommonFactory"
-      ];
-
 
       // 项目基础依赖
       var baseDependence = [
         "$ionicActionSheet", "$ionicLoading", "$ionicModal", "$ionicHistory", "$ionicPlatform",
         "$ionicPopover", "$ionicPopup",
         "$state","$stateParams","$timeout","$log","$q",
-        "HttpFactory","LoadingFactory", "CacheFactory", "CommonFactory","LoginFactory"
+        "HttpFactory"
       ];
 
 
@@ -87,10 +80,6 @@ define(['app'], function (app) {
           case CORDOVA_DEPENDENCE:
             result = injector(cordovaDependence);
             break;
-          //bblr所有依赖
-          case BBLR_DEPENDENCE:
-            result = injector(bblrDependence);
-            break;
           //项目基础依赖
           case BASE_DEPENDENCE:
             result = injector(baseDependence);
@@ -105,7 +94,6 @@ define(['app'], function (app) {
       return {
         IONIC_DEPENDENCE: IONIC_DEPENDENCE,//ionic所有依赖
         CORDOVA_DEPENDENCE: CORDOVA_DEPENDENCE,//cordova所有依赖
-        BBLR_DEPENDENCE: BBLR_DEPENDENCE,//bblr所有依赖
         BASE_DEPENDENCE: BASE_DEPENDENCE,//项目基础依赖
         getDependence: getDependence //获取依赖
       }
