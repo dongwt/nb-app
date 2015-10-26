@@ -63,19 +63,52 @@ define(['app'], function (app) {
 
       /**********************************start 普通登录************************************/
 
-      $scope.generalLogin = function () {
-
-        $scope.user = {
-          nickName:"judy",
-          email:"834575475@qq.com",
-          img:"public/img/ionic.png",
-          status:1
+      /**
+       * 检查字段是否为空
+       * @param user
+       * @returns {boolean}
+       */
+      function checkFieldsIsEmpty(user){
+        if($rootScope.CommonFactory.isEmpty(user.userName)){
+          $rootScope.LoadingFactory.show("用户名不能为空!",1000);
+          return false;
         }
 
-        $rootScope.CacheFactory.put("NB-USER",$scope.user);
+        if($rootScope.CommonFactory.isEmpty(user.password)){
+          $rootScope.LoadingFactory.show("密码不能为空!",1000);
+          return false;
+        }
 
-        $rootScope.$state.go("tabs.user");//登录成功转向用户中心
+        return true;
+      }
 
+      $scope.generalLogin = function () {
+
+        if(!checkFieldsIsEmpty($scope.loginUser)){
+          return;
+        }
+
+
+        $rootScope.LoadingFactory.show();
+        $rootScope.HttpFactory.get(
+          "http://localhost:8089/nb-web/user/client/login/"+$scope.loginUser.userName+"/" + $scope.loginUser.password,
+          null,
+          null
+        ).then(
+          function(data){
+            $scope.user = data.result;
+            if(!$scope.user.img){
+              $scope.user.img = "public/img/ionic.png";
+            }
+            $scope.user.status = 1;
+            $rootScope.CacheFactory.put("NB-USER",$scope.user);
+            $rootScope.$state.go("tabs.user");//登录成功转向用户中心
+            $rootScope.LoadingFactory.hide();
+          },
+          function(data){
+            $rootScope.LoadingFactory.show(data.error,1000);
+          }
+        )
       }
 
 

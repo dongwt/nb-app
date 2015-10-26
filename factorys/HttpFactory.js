@@ -36,8 +36,8 @@ define(['app'], function (app) {
 
             $http(config)
                 .success(function (data) {
-                    //如果status不存在或为0或为success，则表示成功
-                    if (angular.isUndefined(data.status) || data.status == '0' || data.status == 'success') {
+                    //status 0失败 1成功  2token无效
+                    if (data.status == 1) {
                         defer.resolve(data);
                     } else {
                         defer.reject(data);

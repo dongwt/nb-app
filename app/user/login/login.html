@@ -1,6 +1,7 @@
 <ion-view view-title="登录" cache-view="false">
   <ion-nav-buttons side="left" >
     <button class="button  button-clear"
+            ng-if="shortcutSteps.CURRENT_STEP==shortcutSteps.STEP2"
             ng-click="shortcutSteps.CURRENT_STEP=shortcutSteps.STEP1">
       <i class="icon ion-ios-arrow-back"></i>
     </button>
