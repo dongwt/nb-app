@@ -51,6 +51,10 @@ body {
 .login .left-icon{
   font-size: 30px;
 }
+.login .right-icon{
+  font-size: 30px;
+  padding: 0px;
+}
 /**end 登录**/
 
 /**start 注册**/

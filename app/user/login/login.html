@@ -1,26 +1,88 @@
 <ion-view view-title="登录">
-  <ion-content class="padding-vertical login">
+  <ion-nav-buttons side="right">
+    <button class="button  button-clear" ui-sref="register">
+      注册
+    </button>
+  </ion-nav-buttons>
+  <div class="bar bar-subheader">
     <div class="button-bar">
-      <a class="button">邮件快捷登录</a>
-      <a class="button button-positive">普通登录</a>
+      <a class="button"
+         ng-class="{'button-positive':loginWays.CURRENT_LOGIN==loginWays.SHORTCUT_LOGIN}"
+        ng-click="selectLoginWay(loginWays.SHORTCUT_LOGIN)">
+        邮件快捷登录
+      </a>
+      <a class="button"
+         ng-class="{'button-positive':loginWays.CURRENT_LOGIN==loginWays.GENERAL_LOGIN}"
+        ng-click="selectLoginWay(loginWays.GENERAL_LOGIN)">
+        普通登录
+      </a>
     </div>
+  </div>
+
+  <ion-content class="has-subheader login">
 
     <!--邮件快捷登录-->
+    <div ng-if="loginWays.CURRENT_LOGIN==loginWays.SHORTCUT_LOGIN">
+      <div class="list list-inset" ng-if="shortcutSteps.CURRENT_STEP==shortcutSteps.STEP1">
+        <label class="item item-input">
+          <i class="icon ion-ios-telephone-outline placeholder-icon left-icon"
+             ng-class="{'positive':mobilePhoneIsFocus}"></i>
+          <input type="text" placeholder="请输入手机号"
+                 ng-focus="mobilePhoneIsFocus = true"
+                 ng-blur="mobilePhoneIsFocus = false"
+                 ng-model="loginUser.mobilePhone"/>
+        </label>
 
+        <button class="button button-full button-positive" ng-click="goStep2()">
+          获取手机验证码
+        </button>
+      </div>
+
+      <div class="list list-inset" ng-if="shortcutSteps.CURRENT_STEP==shortcutSteps.STEP2">
+        <label class="item item-input">
+          <i class="icon ion-ios-eye-outline placeholder-icon left-icon"
+             ng-class="{'positive':codeIsFocus}"></i>
+          <input type="text" placeholder="请输入验证码"
+                 ng-focus="codeIsFocus = true"
+                 ng-blur="codeIsFocus = false"
+                 ng-model="loginUser.mobilePhone"/>
+        </label>
+
+        <button class="button button-full button-positive" ng-click="shortcutLogin()">
+          登录
+        </button>
+      </div>
+    </div>
 
     <!--普通登录-->
-    <div class="list list-inset" >
+    <div class="list list-inset" ng-if="loginWays.CURRENT_LOGIN==loginWays.GENERAL_LOGIN">
       <label class="item item-input">
-        <i class="icon ion-ios-person-outline placeholder-icon left-icon"></i>
-        <input type="text" placeholder="奶爸账户(邮箱/用户名)"/>
+        <i class="icon ion-ios-person-outline placeholder-icon left-icon"
+           ng-class="{'positive':userNameIsFocus}"></i>
+        <input type="text" placeholder="奶爸账户(邮箱/用户名)"
+               ng-focus="userNameIsFocus = true"
+               ng-blur="userNameIsFocus = false"
+               ng-model="loginUser.userName"/>
       </label>
       <label class="item item-input">
-        <i class="icon ion-ios-unlocked-outline placeholder-icon left-icon"></i>
-        <input type="password" placeholder="请输入密码"/>
+        <i class="icon ion-ios-unlocked-outline placeholder-icon left-icon"
+           ng-class="{'positive':passwordIsFocus}"></i>
+        <input type="password" placeholder="请输入密码"
+               ng-focus="passwordIsFocus = true"
+               ng-blur="passwordIsFocus = false"
+               ng-model="loginUser.password"/>
       </label>
-      <button class="button button-full button-positive">
+      <button class="button button-full button-positive" ng-click="generalLogin()">
         登录
       </button>
+      <div class="row">
+        <div class="col-offset-75">
+          <a class="button  button-clear button-positive" style="font-size: 12px;"
+            ui-sref="forgetPassword">
+            忘记密码?
+          </a>
+        </div>
+      </div>
     </div>
   </ion-content>
 </ion-view>

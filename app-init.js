@@ -18,7 +18,7 @@ define(['app'], function (app) {
       $ionicConfigProvider.form.toggle('small');
       $ionicConfigProvider.backButton.icon('ion-ios-arrow-back');
       $ionicConfigProvider.backButton.text('');
-      $ionicConfigProvider.backButton.previousTitleText('false');
+      $ionicConfigProvider.backButton.previousTitleText(false);
 
 
       $ionicLoadingConfig.template = '<ion-spinner icon="bubbles" class="spinner-stable"></ion-spinner>';

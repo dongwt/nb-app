@@ -16,24 +16,19 @@ define(['app'],
           };
 
           //1.默认路由跳转
-          $urlRouterProvider.otherwise("user/login");
+          $urlRouterProvider.otherwise("tabs/business");
 
-          //.state('tabs', {//框架布局路由
-          //  url: "/tabs",
-          //  abstract: true,
-          //  templateUrl: "app/main/main.html",
-          //  controller: 'mainCtrl',
-          //  resolve: {
-          //    dummy: $couchPotatoProvider.resolveDependencies(['app/main/mainCtrl'])
-          //  }
-          //})
 
 
           //2.配置公共路由
           $stateProvider
             .state('tabs', {//框架布局路由
               url: "/tabs",
-              templateUrl: "app/tabs/tabs.html"
+              templateUrl: "app/tabs/tabs.html",
+              controller: 'tabsCtrl',
+              resolve: {
+                dummy: $couchPotatoProvider.resolveDependencies(['app/tabs/tabsCtrl'])
+              }
             })
 
 
@@ -41,16 +36,24 @@ define(['app'],
               url: '/business',
               views: {
                 'tab-business': {
-                  templateUrl: 'app/business/list.html'
+                  templateUrl: 'app/business/business.html'
                 }
-              }
+              },
+            controller: 'businessCtrl',
+            resolve: {
+            dummy: $couchPotatoProvider.resolveDependencies(['app/business/businessCtrl'])
+          }
             })
             .state('tabs.orders', {//订单路由
               url: '/orders',
               views: {
                 'tab-orders': {
-                  templateUrl: 'app/orders/list.html'
+                  templateUrl: 'app/orders/orders.html'
                 }
+              },
+              controller: 'ordersCtrl',
+              resolve: {
+                dummy: $couchPotatoProvider.resolveDependencies(['app/orders/ordersCtrl'])
               }
             })
 
@@ -58,8 +61,12 @@ define(['app'],
               url: '/user',
               views: {
                 'tab-user': {
-                  templateUrl: 'app/user/index.html'
+                  templateUrl: 'app/user/user.html'
                 }
+              },
+              controller: 'userCtrl',
+              resolve: {
+                dummy: $couchPotatoProvider.resolveDependencies(['app/user/userCtrl'])
               }
             })
 

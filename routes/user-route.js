@@ -19,11 +19,27 @@ define(['app'],
           $stateProvider
             .state('register', {//注册路由
               url: "/user/register",
-              templateUrl: "app/user/register/register.html"
+              templateUrl: "app/user/register/register.html",
+              controller: 'registerCtrl',
+              resolve: {
+                dummy: $couchPotatoProvider.resolveDependencies(['app/user/register/registerCtrl'])
+              }
+            })
+            .state('forgetPassword', {//忘记密码路由
+              url: "/user/password/forger",
+              templateUrl: "app/user/password/forgetPassword.html",
+              controller: 'forgetPasswordCtrl',
+              resolve: {
+                dummy: $couchPotatoProvider.resolveDependencies(['app/user/password/passwordCtrl'])
+              }
             })
             .state('login', {//登录路由
               url: "/user/login",
-              templateUrl: "app/user/login/login.html"
+              templateUrl: "app/user/login/login.html",
+              controller: 'loginCtrl',
+              resolve: {
+                dummy: $couchPotatoProvider.resolveDependencies(['app/user/login/loginCtrl'])
+              }
             })
             .state('setting', {//设置路由
               url: "/user/setting",
@@ -35,7 +51,11 @@ define(['app'],
             })
             .state('info', {//用户信息路由
               url: "/user/info",
-              templateUrl: "app/user/info/info.html"
+              templateUrl: "app/user/info/info.html",
+              controller: 'infoCtrl',
+              resolve: {
+                dummy: $couchPotatoProvider.resolveDependencies(['app/user/info/infoCtrl'])
+              }
             })
 
 
