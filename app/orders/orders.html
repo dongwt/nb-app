@@ -1,5 +1,26 @@
 <ion-view view-title="订单">
   <ion-content class="theme-bg">
-   订单列表
+    <div style="text-align: center;margin-top: 33%;"
+      ng-if="!user.status">
+      <div class="row">
+        <div class="col">
+          <i class="icon ion-ios-person-outline" style="font-size: 80px;"></i>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          您还没有登录，请登录后查看订单
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="button button-small button-outline  button-assertive"
+            ui-sref="login">
+            登录/注册
+          </button>
+        </div>
+      </div>
+    </div>
+
   </ion-content>
 </ion-view>

@@ -74,7 +74,7 @@ define(['app'], function (app) {
 
         $rootScope.CacheFactory.put("NB-USER",$scope.user);
 
-        $rootScope.$state.go("tabs.business");//登录成功转向商家
+        $rootScope.$state.go("tabs.user");//登录成功转向用户中心
 
       }
 
