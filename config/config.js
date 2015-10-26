@@ -8,7 +8,8 @@ define([
 
     //服务注入
     'factorys/InjectorFactory',
-    'factorys/HttpFactory'
+    'factorys/HttpFactory',
+    'factorys/UtilsFactorys'
   ],
   {
     'timeout': 5000,//连接超时设置

@@ -33,7 +33,7 @@ define(['app'], function (app) {
         "$ionicActionSheet", "$ionicLoading", "$ionicModal", "$ionicHistory", "$ionicPlatform",
         "$ionicPopover", "$ionicPopup",
         "$state","$stateParams","$timeout","$log","$q",
-        "HttpFactory"
+        "HttpFactory","LoadingFactory","CacheFactory","CommonFactory"
       ];
 
 

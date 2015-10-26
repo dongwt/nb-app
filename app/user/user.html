@@ -1,33 +1,32 @@
-<ion-view view-title="我" >
+<ion-view view-title="我" cache-view="false">
   <ion-nav-buttons side="right">
     <button class="button  button-clear" ui-sref="setting"
             nav-transition="ios" nav-direction="forward">
       <i class="icon ion-ios-gear-outline"></i>
     </button>
   </ion-nav-buttons>
-  <ion-content class="user padding-vertical">
-   <div class="list">
+  <ion-content class="theme-bg user padding-vertical">
+   <div class="list" ng-if="user.status">
      <a class="item item-thumbnail-left item-icon-right"
         style="padding-left: 85px;font-size: 15px;"
        ui-sref="info"  nav-transition="ios" nav-direction="forward">
-       <img src="public/img/ionic.png">
+       <img ng-src="{{user.img}}">
        <div class="row row-center  nb-text-overflow">
-         <div class="col" style="margin-bottom: 0px;">
-           tom
+         <div class="col" style="margin-bottom: 0px;" ng-bind="user.nickName">
          </div>
        </div>
        <div class="row row-center  nb-text-overflow">
-         <div class="col" style="margin-bottom: 0px;font-size: 10px;">
-           邮箱:834575477775@qq.com
+         <div class="col" style="margin-bottom: 0px;font-size: 10px;" ng-bind="user.email">
          </div>
        </div>
        <i class="icon ion-ios-arrow-right"></i>
      </a>
    </div>
 
-    <div class="list">
+    <div class="list" ng-if="!user.status">
       <a class="item item-thumbnail-left item-icon-right"
          style="padding-left: 85px;font-size: 15px;"
+         ui-sref="login"
          nav-transition="ios" nav-direction="forward">
         <img src="public/img/ionic.png">
         <div class="row row-center  nb-text-overflow">

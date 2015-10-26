@@ -65,6 +65,17 @@ define(['app'], function (app) {
 
       $scope.generalLogin = function () {
 
+        $scope.user = {
+          nickName:"judy",
+          email:"834575475@qq.com",
+          img:"public/img/ionic.png",
+          status:1
+        }
+
+        $rootScope.CacheFactory.put("NB-USER",$scope.user);
+
+        $rootScope.$state.go("tabs.business");//登录成功转向商家
+
       }
 
 

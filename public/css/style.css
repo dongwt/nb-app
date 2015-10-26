@@ -1,6 +1,10 @@
 body {
 }
 
+.theme-bg{
+  background-color: #f8f8f8;
+}
+
 .nb-text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -9,14 +13,13 @@ body {
 
 /**start 用户中心**/
 .user {
-  background-color: #f8f8f8;
+
 }
 
 /**end 用户中心**/
 
 /**start 用户信息**/
 .user-info {
-  background-color: #f8f8f8;
 }
 
 .user-info .user-img {
@@ -45,7 +48,6 @@ body {
 
 /**start 登录**/
 .login{
-
 }
 
 .login .left-icon{
@@ -59,7 +61,6 @@ body {
 
 /**start 注册**/
 .register{
-
 }
 
 .register .left-icon{
@@ -71,3 +72,13 @@ body {
   padding: 0px;
 }
 /**end 注册**/
+
+/**start 商家**/
+.business{
+}
+/**end 商家**/
+
+/**start 订单**/
+.orders{
+}
+/**end 订单**/

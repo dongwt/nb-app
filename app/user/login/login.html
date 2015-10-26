@@ -19,11 +19,11 @@
     </div>
   </div>
 
-  <ion-content class="has-subheader login">
+  <ion-content class="has-subheader theme-bg login">
 
     <!--邮件快捷登录-->
     <div ng-if="loginWays.CURRENT_LOGIN==loginWays.SHORTCUT_LOGIN">
-      <div class="list list-inset" ng-if="shortcutSteps.CURRENT_STEP==shortcutSteps.STEP1">
+      <div class="theme-bg list list-inset" ng-if="shortcutSteps.CURRENT_STEP==shortcutSteps.STEP1">
         <label class="item item-input">
           <i class="icon ion-ios-telephone-outline placeholder-icon left-icon"
              ng-class="{'positive':mobilePhoneIsFocus}"></i>
@@ -38,7 +38,7 @@
         </button>
       </div>
 
-      <div class="list list-inset" ng-if="shortcutSteps.CURRENT_STEP==shortcutSteps.STEP2">
+      <div class="theme-bg list list-inset" ng-if="shortcutSteps.CURRENT_STEP==shortcutSteps.STEP2">
         <label class="item item-input">
           <i class="icon ion-ios-eye-outline placeholder-icon left-icon"
              ng-class="{'positive':codeIsFocus}"></i>
@@ -55,7 +55,7 @@
     </div>
 
     <!--普通登录-->
-    <div class="list list-inset" ng-if="loginWays.CURRENT_LOGIN==loginWays.GENERAL_LOGIN">
+    <div class="theme-bg list list-inset" ng-if="loginWays.CURRENT_LOGIN==loginWays.GENERAL_LOGIN">
       <label class="item item-input">
         <i class="icon ion-ios-person-outline placeholder-icon left-icon"
            ng-class="{'positive':userNameIsFocus}"></i>

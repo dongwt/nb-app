@@ -19,7 +19,6 @@ define(['app'],
           $urlRouterProvider.otherwise("tabs/business");
 
 
-
           //2.配置公共路由
           $stateProvider
             .state('tabs', {//框架布局路由
@@ -36,24 +35,24 @@ define(['app'],
               url: '/business',
               views: {
                 'tab-business': {
-                  templateUrl: 'app/business/business.html'
+                  templateUrl: 'app/business/business.html',
+                  controller: 'businessCtrl',
+                  resolve: {
+                    dummy: $couchPotatoProvider.resolveDependencies(['app/business/businessCtrl'])
+                  }
                 }
-              },
-            controller: 'businessCtrl',
-            resolve: {
-            dummy: $couchPotatoProvider.resolveDependencies(['app/business/businessCtrl'])
-          }
+              }
             })
             .state('tabs.orders', {//订单路由
               url: '/orders',
               views: {
                 'tab-orders': {
-                  templateUrl: 'app/orders/orders.html'
+                  templateUrl: 'app/orders/orders.html',
+                  controller: 'ordersCtrl',
+                  resolve: {
+                    dummy: $couchPotatoProvider.resolveDependencies(['app/orders/ordersCtrl'])
+                  }
                 }
-              },
-              controller: 'ordersCtrl',
-              resolve: {
-                dummy: $couchPotatoProvider.resolveDependencies(['app/orders/ordersCtrl'])
               }
             })
 
@@ -61,12 +60,12 @@ define(['app'],
               url: '/user',
               views: {
                 'tab-user': {
-                  templateUrl: 'app/user/user.html'
+                  templateUrl: 'app/user/user.html',
+                  controller: 'userCtrl',
+                  resolve: {
+                    dummy: $couchPotatoProvider.resolveDependencies(['app/user/userCtrl'])
+                  }
                 }
-              },
-              controller: 'userCtrl',
-              resolve: {
-                dummy: $couchPotatoProvider.resolveDependencies(['app/user/userCtrl'])
               }
             })
 
