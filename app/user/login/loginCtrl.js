@@ -4,7 +4,7 @@
 define(['app'], function (app) {
 
   app.registerController("loginCtrl",
-    ["$rootScope", "$scope", function ($rootScope, $scope) {
+    ["$rootScope", "$scope","$http", function ($rootScope, $scope,$http) {
 
 
       /**
@@ -89,11 +89,9 @@ define(['app'], function (app) {
         }
 
 
-        $rootScope.LoadingFactory.show();
-        $rootScope.HttpFactory.get(
-          "http://localhost:8089/nb-web/user/client/login/"+$scope.loginUser.userName+"/" + $scope.loginUser.password,
-          null,
-          null
+        //$rootScope.LoadingFactory.show();
+        $http.get(
+          "http://localhost:8089/nb-web/user/client/login/"+$scope.loginUser.userName+"/" + $scope.loginUser.password
         ).then(
           function(data){
             $scope.user = data.result;
@@ -106,7 +104,12 @@ define(['app'], function (app) {
             $rootScope.LoadingFactory.hide();
           },
           function(data){
-            $rootScope.LoadingFactory.show(data.error,1000);
+            if(data){
+              $rootScope.LoadingFactory.show(data.error,1000);
+            }
+          },
+          function(data){
+
           }
         )
       }

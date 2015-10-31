@@ -9,7 +9,6 @@ define(['app'], function (app) {
   app.config(['$ionicConfigProvider', '$ionicLoadingConfig',
     function ($ionicConfigProvider, $ionicLoadingConfig) {
 
-
       $ionicConfigProvider.tabs.position('bottom');
       $ionicConfigProvider.views.transition('ios');
       $ionicConfigProvider.tabs.style('standard');
@@ -20,11 +19,17 @@ define(['app'], function (app) {
       $ionicConfigProvider.backButton.text('');
       $ionicConfigProvider.backButton.previousTitleText(false);
 
-
       $ionicLoadingConfig.template = '<ion-spinner icon="bubbles" class="spinner-stable"></ion-spinner>';
-
-
     }]);
+
+  /**
+   * 框架配置
+   */
+  app.config(['$httpProvider',function($httpProvider){
+
+    $httpProvider.interceptors.push('FrameHttpInterceptor');
+
+  }]);
 
 
   /**
