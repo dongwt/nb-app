@@ -90,8 +90,12 @@ define(['app'], function (app) {
 
 
         $rootScope.LoadingFactory.show();
-        $http.get(
-          "/nb-web/user/client/login/"+$scope.loginUser.userName+"/" + $scope.loginUser.password
+        $http.post(
+          "/nb-web/user/client/login",
+          {
+            nickname:$scope.loginUser.userName,
+            passWord:$scope.loginUser.password
+          }
         ).then(
           function(data){
             $scope.user = data.result;

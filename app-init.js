@@ -32,6 +32,8 @@ define(['app'], function (app) {
   }]);
 
 
+
+
   /**
    * 路由状态的控制
    */
