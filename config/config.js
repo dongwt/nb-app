@@ -20,11 +20,11 @@ define([
   {
     //生产环境
     produce: {
-      server_url:"http://localhost:8089/nb-web"
+      server_url:"http://localhost:8089"
     },
     //测试环境
     test: {
-      server_url:"http://localhost:8089/nb-web"
+      server_url:"http://localhost:8089"
     },
     timeout: 5000,//连接超时设置
     isDebug: true//是否是测试环境

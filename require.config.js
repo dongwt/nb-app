@@ -42,6 +42,8 @@ require(['angular', 'app', 'config/config', 'app-init'], function (angular, app,
     for (var prop in current) {
       config[prop] = current[prop];
     }
+
+    return config;
   }
 
 

@@ -9,8 +9,9 @@ define(['app'],
       function request(config) {
         config.isIntercept = false;//是否需要拦截
         if (config.url.indexOf("nb-web") != -1) {
+          config.url = NBConfig.server_url + config.url;
           config.isIntercept = true;
-          config.timeout = 5000;
+          config.timeout = NBConfig.timeout;
         }
 
         return config;
@@ -20,6 +21,7 @@ define(['app'],
 
         //如果需要拦截
         if (rejection.config.isIntercept) {
+          return $q.reject(rejection.data);
 
         }
 
@@ -32,15 +34,15 @@ define(['app'],
         if (response.config.isIntercept) {
           switch (response.data.status){
             case FRAME.RESULT_FRAME.ERROR:
-              return $q.reject(response);
+              return $q.reject(response.data);
               break;
             case FRAME.RESULT_FRAME.SUCCESS:
-              return response;
+              return response.data;
               break;
             case FRAME.RESULT_FRAME.INVALID_TOKEN:
-              return $q.reject(response);
+              return $q.reject(response.data);
               break;
-            default : return response;
+            default : return response.data;
           }
         }
 
@@ -48,8 +50,6 @@ define(['app'],
       }
 
       function responseError(rejection) {
-        var defer = $q.defer();
-
         //如果需要拦截
         if (rejection.config.isIntercept) {
           //连接超时
@@ -61,6 +61,8 @@ define(['app'],
               noBackdrop:true
             });
             return $q.reject(null);
+          }else{
+            return $q.reject(rejection.data);
           }
 
         }

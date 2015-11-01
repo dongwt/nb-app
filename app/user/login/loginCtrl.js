@@ -89,9 +89,9 @@ define(['app'], function (app) {
         }
 
 
-        //$rootScope.LoadingFactory.show();
+        $rootScope.LoadingFactory.show();
         $http.get(
-          "http://localhost:8089/nb-web/user/client/login/"+$scope.loginUser.userName+"/" + $scope.loginUser.password
+          "/nb-web/user/client/login/"+$scope.loginUser.userName+"/" + $scope.loginUser.password
         ).then(
           function(data){
             $scope.user = data.result;
@@ -107,9 +107,6 @@ define(['app'], function (app) {
             if(data){
               $rootScope.LoadingFactory.show(data.error,1000);
             }
-          },
-          function(data){
-
           }
         )
       }
