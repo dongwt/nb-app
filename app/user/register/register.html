@@ -16,11 +16,11 @@
     <div class="theme-bg list list-inset" ng-if="step.CURRENT_STEP == step.STEP1">
       <label class="item item-input">
         <i class="icon ion-ios-email-outline placeholder-icon left-icon"></i>
-        <input type="text" placeholder="请输入邮箱号"/>
+        <input type="text" placeholder="请输入邮箱号" ng-model="registerUser.email"/>
       </label>
       <label class="item item-input">
         <i class="icon ion-ios-unlocked-outline placeholder-icon left-icon"></i>
-        <input type="password" placeholder="请输入密码"/>
+        <input type="password" placeholder="请输入密码" ng-model="registerUser.password"/>
       </label>
 
       <button class="button button-full button-positive" ng-click="goStep2()">
@@ -31,10 +31,10 @@
     <div class="theme-bg list list-inset" ng-if="step.CURRENT_STEP == step.STEP2">
       <label class="item item-input">
         <i class="icon ion-ios-eye-outline placeholder-icon left-icon"></i>
-        <input type="text" placeholder="请输入验证码"/>
+        <input type="text" placeholder="请输入验证码" ng-model="registerUser.code"/>
       </label>
 
-      <button class="button button-full button-positive">
+      <button class="button button-full button-positive" ng-click="register()">
         注册
       </button>
     </div>

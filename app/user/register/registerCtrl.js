@@ -4,14 +4,52 @@
 define(['app'], function (app) {
 
   app.registerController("registerCtrl",
-    ["$rootScope","$scope",function($rootScope,$scope){
+    ["$rootScope","$scope","$http",function($rootScope,$scope,$http){
 
       $scope.goStep1 = function(){
         $scope.step.CURRENT_STEP = $scope.step.STEP1;
       }
 
       $scope.goStep2 = function(){
-        $scope.step.CURRENT_STEP = $scope.step.STEP2;
+        //$scope.step.CURRENT_STEP = $scope.step.STEP2;
+
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:8089/nb-web/user/client/sendEmail",
+          success:function(){
+
+          },
+          error:function(){
+
+          }
+        });
+
+        //$http.post( "/nb-web/user/client/sendEmail",
+        //  {
+        //    email:$scope.registerUser.email,
+        //    passWord:$scope.registerUser.password
+        //  }
+        //).then(
+        //  function(data){
+        //
+        //  },
+        //  function(data){
+        //
+        //  }
+        //)
+
+      }
+
+      $scope.register = function(){
+
+        $http.get( "/nb-web/user/client/register/" + $scope.registerUser.code).then(
+          function(data){
+            $rootScope.$state.go("login");
+          },
+          function(data){
+
+          }
+        )
 
       }
 
