@@ -25,30 +25,31 @@ define(['app'], function (app) {
   /**
    * 框架配置
    */
-  app.config(['$httpProvider',function($httpProvider){
+  app.config(['$httpProvider', function ($httpProvider) {
+
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
     $httpProvider.interceptors.push('FrameHttpInterceptor');
 
   }]);
 
 
-
-
   /**
    * 路由状态的控制
    */
-  app.run([ '$rootScope','InjectorFactory',function ($rootScope,InjectorFactory) {
+  app.run(['$rootScope', 'InjectorFactory', function ($rootScope, InjectorFactory) {
 
-      //获取基本的依赖服务,并放置于$rootScope下
-      angular.extend($rootScope,InjectorFactory.getDependence(InjectorFactory.BASE_DEPENDENCE));
+    //获取基本的依赖服务,并放置于$rootScope下
+    angular.extend($rootScope, InjectorFactory.getDependence(InjectorFactory.BASE_DEPENDENCE));
 
-      //控制路由跳转
-      $rootScope.$on('$stateChangeStart',
-        function (event, toState, toParams, fromState, fromParams) {
+    //控制路由跳转
+    $rootScope.$on('$stateChangeStart',
+      function (event, toState, toParams, fromState, fromParams) {
 
 
-        })
-    }
+      })
+  }
   ]);
 
 
@@ -57,7 +58,6 @@ define(['app'], function (app) {
    */
   app.run(["$ionicPlatform", "$rootScope", "$ionicPopup", "$location",
     function ($ionicPlatform, $rootScope, $ionicPopup, $location) {
-
 
 
     }

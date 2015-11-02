@@ -13,30 +13,26 @@ define(['app'], function (app) {
       $scope.goStep2 = function(){
         //$scope.step.CURRENT_STEP = $scope.step.STEP2;
 
-        $.ajax({
-          type: "POST",
-          url: "http://localhost:8089/nb-web/user/client/sendEmail",
-          success:function(){
+
+        $http.post( "/nb-web/user/client/sendEmail",
+          {
+            email:$scope.registerUser.email,
+            passWord:$scope.registerUser.password
+          },
+          {
+            headers:{
+              "access-token":"11"
+            }
+          }
+        ).then(
+          function(data){
 
           },
-          error:function(){
+          function(data){
 
           }
-        });
+        )
 
-        //$http.post( "/nb-web/user/client/sendEmail",
-        //  {
-        //    email:$scope.registerUser.email,
-        //    passWord:$scope.registerUser.password
-        //  }
-        //).then(
-        //  function(data){
-        //
-        //  },
-        //  function(data){
-        //
-        //  }
-        //)
 
       }
 
