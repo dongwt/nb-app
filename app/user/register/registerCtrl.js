@@ -6,36 +6,32 @@ define(['app'], function (app) {
   app.registerController("registerCtrl",
     ["$rootScope","$scope","$http",function($rootScope,$scope,$http){
 
-      $scope.goStep1 = function(){
-        $scope.step.CURRENT_STEP = $scope.step.STEP1;
-      }
 
-      $scope.goStep2 = function(){
-        //$scope.step.CURRENT_STEP = $scope.step.STEP2;
-
-
-        $http.post( "/nb-web/user/client/sendEmail",
+      /**
+       * 发送验证码
+       */
+      $scope.sendEmailCode = function(){
+        $http.post("/nb-web/user/client/sendEmail/",
           {
-            email:$scope.registerUser.email,
-            passWord:$scope.registerUser.password
+            email:$scope.registerUser.email
+          }).then(
+          function(data){
+
           },
-          {
-            headers:{
-              "access-token":"11"
+          function(error){
+
+            if(error){
+
             }
-          }
-        ).then(
-          function(data){
-
-          },
-          function(data){
 
           }
         )
-
-
       }
 
+
+      /**
+       * 注册
+       */
       $scope.register = function(){
 
         $http.get( "/nb-web/user/client/register/" + $scope.registerUser.code).then(
@@ -58,12 +54,6 @@ define(['app'], function (app) {
           email:"",
           password:"",
           code:""
-        }
-
-        $scope.step = {
-          STEP1:1,
-          STEP2:2,
-          CURRENT_STEP:1
         }
 
       }
