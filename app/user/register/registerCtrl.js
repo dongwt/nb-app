@@ -34,7 +34,20 @@ define(['app'], function (app) {
        */
       $scope.register = function(){
 
-        $http.get( "/nb-web/user/client/register/" + $scope.registerUser.code).then(
+        var auth = {ordinaryToken:"563b1e643004440824377d45"};
+
+        $http.post( "/nb-web/user/client/register/",
+          {
+            email:"834575475@qq.com",
+            passWord:"111111",
+            code:"89630"
+          },
+          {
+            headers:{
+              auth:angular.toJson(auth)
+            }
+          }
+        ).then(
           function(data){
             $rootScope.$state.go("login");
           },
@@ -52,7 +65,7 @@ define(['app'], function (app) {
 
         $scope.registerUser = {
           email:"",
-          password:"",
+          passWord:"",
           code:""
         }
 
