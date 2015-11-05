@@ -16,7 +16,7 @@ define(['app'], function (app) {
             email:$scope.registerUser.email
           }).then(
           function(data){
-
+            $scope.auth.ordinaryToken = data.result.ordinaryToken;
           },
           function(error){
 
@@ -34,17 +34,12 @@ define(['app'], function (app) {
        */
       $scope.register = function(){
 
-        var auth = {ordinaryToken:"563b1e643004440824377d45"};
 
         $http.post( "/nb-web/user/client/register/",
-          {
-            email:"834575475@qq.com",
-            passWord:"111111",
-            code:"89630"
-          },
+          $scope.registerUser,
           {
             headers:{
-              auth:angular.toJson(auth)
+              auth:angular.toJson($scope.auth)
             }
           }
         ).then(
@@ -62,6 +57,8 @@ define(['app'], function (app) {
 
 
       function execute(){
+
+        $scope.auth = {};//权限对象
 
         $scope.registerUser = {
           email:"",
