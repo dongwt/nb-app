@@ -31,23 +31,95 @@ define(['app'], function (app) {
 
       /**********************************start 邮件快捷登录**********************************/
 
-      $scope.goStep1 = function(){
+      function goStep1(){
         $scope.shortcutSteps.CURRENT_STEP = $scope.shortcutSteps.STEP1;
         $scope.loginUser.mobilePhone = "";
         $scope.loginUser.code = "";
       }
 
-      $scope.goStep2 = function(){
+      function goStep2(){
         $scope.shortcutSteps.CURRENT_STEP = $scope.shortcutSteps.STEP2;
       }
 
-      $scope.shortcutLogin = function(){
 
+      /**
+       * 发送邮箱验证码
+       */
+      $scope.sendEmailCode = function () {
+
+        //校验邮箱是否注册
+        $rootScope.$http.get("/nb-web/user/client/emailIsExist",
+          {
+            params:{
+              email: $scope.loginUser.email
+            }
+          }
+        ).then(
+          function (data) {
+            //邮箱不存在
+            $rootScope.LoadingFactory.show("邮箱未注册，请先注册！",1000);
+          },
+          function (error) {
+            //邮箱已经存在
+            if (error) {
+              $rootScope.$http.post("/nb-web/user/client/sendEmailCode/",
+                {
+                  email: $scope.loginUser.email
+                }).then(
+                function (data) {
+                  $rootScope.$log.debug("验证码发送成功!" + data);
+                  $scope.auth.ordinaryToken = data.result.ordinaryToken;
+                  goStep2(); //转向第二步
+
+                },
+                function (error) {
+                  if (error) {
+                    $rootScope.$log.debug(error);
+                    $rootScope.LoadingFactory.show("验证码发送失败!",1000);
+                  }
+                }
+              )
+            }
+          }
+        );
+
+
+      }
+
+      $scope.shortcutLogin = function(){
+        $rootScope.LoadingFactory.show();
+        $http.post(
+          "/nb-web/user/client/shortcutLogin",
+          $scope.loginUser,
+          {
+           headers:{
+             auth: angular.toJson($scope.auth)
+           }
+          }
+        ).then(
+          function(data){
+            $scope.user = data.result;
+            if(!$scope.user.img){
+              $scope.user.img = "public/img/ionic.png";
+            }
+            $scope.user.status = 1;
+            $rootScope.CacheFactory.put("NB-USER",$scope.user);
+            $rootScope.$state.go("tabs.user");//登录成功转向用户中心
+            $rootScope.LoadingFactory.hide();
+          },
+          function(data){
+            if(data){
+              $rootScope.LoadingFactory.show(data.error,1000);
+            }
+          }
+        )
       }
 
 
 
       function executeShortcut() {
+
+        $scope.auth = {};
 
         $scope.shortcutSteps = {
           STEP1: 1,
@@ -55,7 +127,7 @@ define(['app'], function (app) {
           CURRENT_STEP: 1
         }
 
-        $scope.goStep1();
+        goStep1();
 
       }
 
@@ -91,7 +163,7 @@ define(['app'], function (app) {
 
         $rootScope.LoadingFactory.show();
         $http.post(
-          "/nb-web/user/client/login",
+          "/nb-web/user/client/generalLogin",
           {
             nickname:$scope.loginUser.userName,
             passWord:$scope.loginUser.password

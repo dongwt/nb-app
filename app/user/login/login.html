@@ -32,15 +32,15 @@
     <div ng-if="loginWays.CURRENT_LOGIN==loginWays.SHORTCUT_LOGIN">
       <div class="theme-bg list list-inset" ng-if="shortcutSteps.CURRENT_STEP==shortcutSteps.STEP1">
         <label class="item item-input">
-          <i class="icon ion-ios-telephone-outline placeholder-icon left-icon"
+          <i class="icon ion-ios-email-outline placeholder-icon left-icon"
              ng-class="{'positive':mobilePhoneIsFocus}"></i>
-          <input type="text" placeholder="请输入手机号"
+          <input type="text" placeholder="请输入邮箱"
                  ng-focus="mobilePhoneIsFocus = true"
                  ng-blur="mobilePhoneIsFocus = false"
-                 ng-model="loginUser.mobilePhone"/>
+                 ng-model="loginUser.email"/>
         </label>
 
-        <button class="button button-full button-positive" ng-click="goStep2()">
+        <button class="button button-full button-positive" ng-click="sendEmailCode()">
           获取手机验证码
         </button>
       </div>
@@ -52,7 +52,7 @@
           <input type="text" placeholder="请输入验证码"
                  ng-focus="codeIsFocus = true"
                  ng-blur="codeIsFocus = false"
-                 ng-model="loginUser.mobilePhone"/>
+                 ng-model="loginUser.code"/>
         </label>
 
         <button class="button button-full button-positive" ng-click="shortcutLogin()">
