@@ -41,11 +41,34 @@ define(['app'], function (app) {
         $scope.shortcutSteps.CURRENT_STEP = $scope.shortcutSteps.STEP2;
       }
 
+      /**
+       * 检查字段(快捷登录)
+       * @param user
+       * @returns {boolean}
+       */
+      function checkFieldsForShortcut(user){
+        if($rootScope.CommonFactory.isEmpty(user.email)){
+          $rootScope.LoadingFactory.show("邮箱不能为空!",1000);
+          return false;
+        }
+
+        if(!$rootScope.CommonFactory.isEmail(user.email)){
+          $rootScope.LoadingFactory.show("邮箱格式不正确!",1000);
+          return false;
+        }
+
+        return true;
+      }
+
 
       /**
        * 发送邮箱验证码
        */
       $scope.sendEmailCode = function () {
+
+        if(!checkFieldsForShortcut($scope.loginUser)){
+          return;
+        }
 
         //校验邮箱是否注册
         $rootScope.$http.get("/nb-web/user/client/emailIsExist",
@@ -87,6 +110,12 @@ define(['app'], function (app) {
       }
 
       $scope.shortcutLogin = function(){
+
+        if($rootScope.CommonFactory.isEmpty($scope.loginUser.code)){
+          $rootScope.LoadingFactory.show("验证码不能为空!",1000);
+          return false;
+        }
+
         $rootScope.LoadingFactory.show();
         $http.post(
           "/nb-web/user/client/shortcutLogin",
@@ -136,11 +165,11 @@ define(['app'], function (app) {
       /**********************************start 普通登录************************************/
 
       /**
-       * 检查字段是否为空
+       * 检查字段(普通登录)
        * @param user
        * @returns {boolean}
        */
-      function checkFieldsIsEmpty(user){
+      function checkFieldsForGeneral(user){
         if($rootScope.CommonFactory.isEmpty(user.userName)){
           $rootScope.LoadingFactory.show("用户名不能为空!",1000);
           return false;
@@ -156,7 +185,7 @@ define(['app'], function (app) {
 
       $scope.generalLogin = function () {
 
-        if(!checkFieldsIsEmpty($scope.loginUser)){
+        if(!checkFieldsForGeneral($scope.loginUser)){
           return;
         }
 

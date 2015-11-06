@@ -60,7 +60,7 @@ define(['app'], function (app) {
           function (error) {
             //邮箱已经存在
             if (error) {
-              $rootScope.LoadingFactory.show("邮箱已注册，请登录！",1000);
+              $rootScope.LoadingFactory.show(error.error,1000);
 
             }
           }
