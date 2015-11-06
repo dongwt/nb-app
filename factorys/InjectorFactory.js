@@ -32,8 +32,8 @@ define(['app'], function (app) {
       var baseDependence = [
         "$ionicActionSheet", "$ionicLoading", "$ionicModal", "$ionicHistory", "$ionicPlatform",
         "$ionicPopover", "$ionicPopup",
-        "$state","$stateParams","$timeout","$log","$q",
-        "HttpFactory","LoadingFactory","CacheFactory","CommonFactory"
+        "$state","$stateParams","$timeout","$log","$q","$http",
+        "LoadingFactory","CacheFactory","CommonFactory"
       ];
 
 
