@@ -41,25 +41,33 @@ define(['app'],
                 dummy: $couchPotatoProvider.resolveDependencies(['app/user/login/loginCtrl'])
               }
             })
-            .state('setting', {//设置路由
+
+            .state('tabs.setting', {//设置路由
               url: "/user/setting",
-              templateUrl: "app/user/setting/setting.html",
-              controller: 'settingCtrl',
-              resolve: {
-                dummy: $couchPotatoProvider.resolveDependencies(['app/user/setting/settingCtrl'])
+              views: {
+                'tab-user': {
+                  templateUrl: "app/user/setting/setting.html",
+                  controller: 'settingCtrl',
+                  resolve: {
+                    dummy: $couchPotatoProvider.resolveDependencies(['app/user/setting/settingCtrl'])
+                  }
+                }
               }
             })
-            .state('info', {//用户信息路由
+
+
+            .state('tabs.info', {//用户信息路由
               url: "/user/info",
-              templateUrl: "app/user/info/info.html",
-              controller: 'infoCtrl',
-              resolve: {
-                dummy: $couchPotatoProvider.resolveDependencies(['app/user/info/infoCtrl'])
+              views: {
+                'tab-user': {
+                  templateUrl: "app/user/info/info.html",
+                  controller: 'infoCtrl',
+                  resolve: {
+                    dummy: $couchPotatoProvider.resolveDependencies(['app/user/info/infoCtrl'])
+                  }
+                }
               }
             })
-
-
-
 
         }
       ]

@@ -14,6 +14,9 @@ define([
     'factorys/HttpFactory',
     'factorys/UtilsFactorys',
 
+    //指令
+    'directives/CommonDirective',
+
     //拦截器注入
     'interceptors/FrameHttpInterceptor'
   ],

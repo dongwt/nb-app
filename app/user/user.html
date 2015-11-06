@@ -1,15 +1,13 @@
 <ion-view view-title="我" cache-view="false">
   <ion-nav-buttons side="right">
-    <button class="button  button-clear" ui-sref="setting"
-            nav-transition="ios" nav-direction="forward">
+    <button class="button  button-clear" ui-sref="tabs.setting">
       <i class="icon ion-ios-gear-outline"></i>
     </button>
   </ion-nav-buttons>
   <ion-content class="theme-bg user padding-vertical">
    <div class="list" ng-if="user.status">
      <a class="item item-thumbnail-left item-icon-right"
-        style="padding-left: 85px;font-size: 15px;"
-       ui-sref="info"  nav-transition="ios" nav-direction="forward">
+        style="padding-left: 85px;font-size: 15px;" ui-sref="tabs.info" >
        <img ng-src="{{user.img}}">
        <div class="row row-center  nb-text-overflow">
          <div class="col" style="margin-bottom: 0px;" ng-bind="user.nickname">
