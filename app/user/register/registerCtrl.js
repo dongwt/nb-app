@@ -11,22 +11,52 @@ define(['app'], function (app) {
       /**
        * 转向第一步
        */
-      function goStep1() {
+      $scope.goStep1 = function() {
         $scope.step.CURRENT_STEP = $scope.step.STEP1;
       }
 
       /**
        * 转向第二步
        */
-      function goStep2() {
+      $scope.goStep2 = function() {
         $scope.step.CURRENT_STEP = $scope.step.STEP2;
 
+      }
+
+      /**
+       * 检查字段
+       * @param user
+       * @returns {boolean}
+       */
+      function checkFields(user){
+        if($rootScope.CommonFactory.isEmpty(user.email)){
+          $rootScope.LoadingFactory.show("用户名不能为空!",1000);
+          return false;
+        }
+
+        if(!$rootScope.CommonFactory.isEmail(user.email)){
+          $rootScope.LoadingFactory.show("邮箱格式不正确!",1000);
+          return false;
+        }
+
+        if($rootScope.CommonFactory.isEmpty(user.passWord)){
+          $rootScope.LoadingFactory.show("密码不能为空!",1000);
+          return false;
+        }
+
+        return true;
       }
 
       /**
        * 发送邮箱验证码
        */
       $scope.sendEmailCode = function () {
+
+        if(!checkFields($scope.registerUser)){
+          return;
+        }
+
+        $rootScope.LoadingFactory.show();
 
         //校验邮箱是否注册
         $rootScope.$http.get("/nb-web/user/client/emailIsExist",
@@ -43,9 +73,10 @@ define(['app'], function (app) {
                 email: $scope.registerUser.email
               }).then(
               function (data) {
+                $rootScope.LoadingFactory.hide();
                 $rootScope.$log.debug("验证码发送成功!" + data);
                 $scope.auth.ordinaryToken = data.result.ordinaryToken;
-                goStep2(); //转向第二步
+                $scope.goStep2(); //转向第二步
 
               },
               function (error) {
@@ -74,6 +105,13 @@ define(['app'], function (app) {
        * 注册
        */
       $scope.register = function () {
+
+        if($rootScope.CommonFactory.isEmpty($scope.registerUser.code)){
+          $rootScope.LoadingFactory.show("验证码不能为空!",1000);
+          return;
+        }
+
+        $rootScope.LoadingFactory.show();
         $rootScope.$http.post("/nb-web/user/client/register/",
           $scope.registerUser,
           {
@@ -83,6 +121,7 @@ define(['app'], function (app) {
           }
         ).then(
           function (data) {
+            $rootScope.LoadingFactory.hide();
             $rootScope.$log.debug("注册成功!" + data);
             $rootScope.$state.go("login");//转向登录页面
           },

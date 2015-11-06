@@ -16,12 +16,13 @@ define(['app'], function (app) {
           //普通登录
           case $scope.loginWays.GENERAL_LOGIN:
             $scope.loginWays.CURRENT_LOGIN = $scope.loginWays.GENERAL_LOGIN;
-            $scope.loginUser.userName = "";
-            $scope.loginUser.password = "";
+            $scope.loginUser.userName = $scope.cacheUser.userName || "";
+            $scope.loginUser.passWord = "";
             break;
           //邮件快捷登录
           case $scope.loginWays.SHORTCUT_LOGIN:
             $scope.loginWays.CURRENT_LOGIN = $scope.loginWays.SHORTCUT_LOGIN;
+            $scope.loginUser.email = $scope.cacheUser.email || "";
             $scope.goStep1();
             break;
         }
@@ -31,14 +32,16 @@ define(['app'], function (app) {
 
       /**********************************start 邮件快捷登录**********************************/
 
-      function goStep1(){
+      $scope.goStep1 = function(){
         $scope.shortcutSteps.CURRENT_STEP = $scope.shortcutSteps.STEP1;
-        $scope.loginUser.mobilePhone = "";
+        $scope.loginUser.email = $scope.cacheUser.email || "";
         $scope.loginUser.code = "";
       }
 
-      function goStep2(){
+      $scope.goStep2 = function(){
         $scope.shortcutSteps.CURRENT_STEP = $scope.shortcutSteps.STEP2;
+        $scope.loginUser.userName = $scope.cacheUser.userName || "";
+        $scope.loginUser.passWord = "";
       }
 
       /**
@@ -70,6 +73,8 @@ define(['app'], function (app) {
           return;
         }
 
+        $rootScope.LoadingFactory.show();
+
         //校验邮箱是否注册
         $rootScope.$http.get("/nb-web/user/client/emailIsExist",
           {
@@ -90,9 +95,10 @@ define(['app'], function (app) {
                   email: $scope.loginUser.email
                 }).then(
                 function (data) {
+                  $rootScope.loadingFactory.hide();
                   $rootScope.$log.debug("验证码发送成功!" + data);
                   $scope.auth.ordinaryToken = data.result.ordinaryToken;
-                  goStep2(); //转向第二步
+                  $scope.goStep2(); //转向第二步
 
                 },
                 function (error) {
@@ -131,7 +137,7 @@ define(['app'], function (app) {
             if(!$scope.user.img){
               $scope.user.img = "public/img/ionic.png";
             }
-            $scope.user.status = 1;
+            $scope.user.userName = $scope.loginUser.userName;
             $rootScope.CacheFactory.put("NB-USER",$scope.user);
             $rootScope.$state.go("tabs.user");//登录成功转向用户中心
             $rootScope.LoadingFactory.hide();
@@ -156,7 +162,7 @@ define(['app'], function (app) {
           CURRENT_STEP: 1
         }
 
-        goStep1();
+        $scope.goStep1();
 
       }
 
@@ -175,7 +181,7 @@ define(['app'], function (app) {
           return false;
         }
 
-        if($rootScope.CommonFactory.isEmpty(user.password)){
+        if($rootScope.CommonFactory.isEmpty(user.passWord)){
           $rootScope.LoadingFactory.show("密码不能为空!",1000);
           return false;
         }
@@ -195,7 +201,7 @@ define(['app'], function (app) {
           "/nb-web/user/client/generalLogin",
           {
             nickname:$scope.loginUser.userName,
-            passWord:$scope.loginUser.password
+            passWord:$scope.loginUser.passWord
           }
         ).then(
           function(data){
@@ -203,7 +209,8 @@ define(['app'], function (app) {
             if(!$scope.user.img){
               $scope.user.img = "public/img/ionic.png";
             }
-            $scope.user.status = 1;
+            $scope.user.userName = $scope.loginUser.userName;
+
             $rootScope.CacheFactory.put("NB-USER",$scope.user);
             $rootScope.$state.go("tabs.user");//登录成功转向用户中心
             $rootScope.LoadingFactory.hide();
@@ -229,10 +236,19 @@ define(['app'], function (app) {
 
       function execute() {
 
+
+        $scope.cacheUser = $rootScope.CacheFactory.get("NB-USER");
+
+        if($scope.cacheUser == undefined){
+          $scope.cacheUser = {};
+        }
+
+
         $scope.loginUser = {
-          userName: "",
-          password: "",
-          mobilePhone: "",
+          userName: $scope.cacheUser.userName || "",
+          nickname:$scope.cacheUser.nickname || "",
+          passWord: "",
+          email: "",
           code: ""
         }
 
