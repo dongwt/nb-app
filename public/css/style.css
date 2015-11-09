@@ -5,6 +5,14 @@ body {
   background-color: #f8f8f8;
 }
 
+.input-left-icon{
+  font-size: 30px;
+}
+.input-right-icon{
+  font-size: 30px;
+  padding: 0px;
+}
+
 .nb-text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -50,27 +58,14 @@ body {
 .login{
 }
 
-.login .left-icon{
-  font-size: 30px;
-}
-.login .right-icon{
-  font-size: 30px;
-  padding: 0px;
-}
+
 /**end 登录**/
 
 /**start 注册**/
 .register{
 }
 
-.register .left-icon{
-  font-size: 30px;
-}
 
-.register .right-icon{
-  font-size: 30px;
-  padding: 0px;
-}
 /**end 注册**/
 
 /**start 商家**/

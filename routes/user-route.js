@@ -69,6 +69,19 @@ define(['app'],
               }
             })
 
+            .state('tabs.editPassword', {//修改密码路由
+              url: "/user/info/editPassword",
+              views: {
+                'tab-user': {
+                  templateUrl: "app/user/password/editPassword.html",
+                  controller: 'editPasswordCtrl',
+                  resolve: {
+                    dummy: $couchPotatoProvider.resolveDependencies(['app/user/password/passwordCtrl'])
+                  }
+                }
+              }
+            })
+
         }
       ]
     );
