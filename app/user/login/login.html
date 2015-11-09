@@ -32,13 +32,16 @@
     <div ng-if="loginWays.CURRENT_LOGIN==loginWays.SHORTCUT_LOGIN">
       <div class="theme-bg list list-inset" ng-if="shortcutSteps.CURRENT_STEP==shortcutSteps.STEP1">
         <label class="item item-input">
-          <i class="icon ion-ios-email-outline placeholder-icon left-icon"
+          <i class="icon ion-ios-email-outline placeholder-icon input-left-icon"
              ng-class="{'positive':mobilePhoneIsFocus}"></i>
           <input type="text" placeholder="请输入邮箱"
                  ng-focus="mobilePhoneIsFocus = true"
                  ng-blur="mobilePhoneIsFocus = false"
                  ng-model="loginUser.email"/>
         </label>
+        <i class="icon ion-ios-close placeholder-icon input-right-icon-close"
+           ng-if="loginUser.email"
+           ng-click="loginUser.email = ''"></i>
 
         <button class="button button-full button-positive" ng-click="sendEmailCode()">
           获取手机验证码
@@ -47,13 +50,16 @@
 
       <div class="theme-bg list list-inset" ng-if="shortcutSteps.CURRENT_STEP==shortcutSteps.STEP2">
         <label class="item item-input">
-          <i class="icon ion-ios-eye-outline placeholder-icon left-icon"
+          <i class="icon ion-ios-eye-outline placeholder-icon input-left-icon"
              ng-class="{'positive':codeIsFocus}"></i>
           <input type="text" placeholder="请输入验证码"
                  ng-focus="codeIsFocus = true"
                  ng-blur="codeIsFocus = false"
                  ng-model="loginUser.code"/>
         </label>
+        <i class="icon ion-ios-close placeholder-icon input-right-icon-close"
+           ng-if="loginUser.code"
+           ng-click="loginUser.code = ''"></i>
 
         <button class="button button-full button-positive" ng-click="shortcutLogin()">
           登录
@@ -64,21 +70,28 @@
     <!--普通登录-->
     <div class="theme-bg list list-inset" ng-if="loginWays.CURRENT_LOGIN==loginWays.GENERAL_LOGIN">
       <label class="item item-input">
-        <i class="icon ion-ios-person-outline placeholder-icon left-icon"
+        <i class="icon ion-ios-person-outline placeholder-icon input-left-icon"
            ng-class="{'positive':userNameIsFocus}"></i>
         <input type="text" placeholder="奶爸账户(邮箱/用户名)"
                ng-focus="userNameIsFocus = true"
                ng-blur="userNameIsFocus = false"
                ng-model="loginUser.userName"/>
       </label>
+      <i class="icon ion-ios-close placeholder-icon input-right-icon-close"
+         ng-if="loginUser.userName"
+         ng-click="loginUser.userName = '';loginUser.passWord = ''"></i>
       <label class="item item-input">
-        <i class="icon ion-ios-unlocked-outline placeholder-icon left-icon"
+        <i class="icon ion-ios-unlocked-outline placeholder-icon input-left-icon"
            ng-class="{'positive':passwordIsFocus}"></i>
         <input type="password" placeholder="请输入密码"
                ng-focus="passwordIsFocus = true"
                ng-blur="passwordIsFocus = false"
                ng-model="loginUser.passWord"/>
       </label>
+      <i class="icon ion-ios-close placeholder-icon input-right-icon-close"
+         style="top:70px;"
+         ng-if="loginUser.passWord"
+         ng-click="loginUser.passWord = ''"></i>
       <button class="button button-full button-positive" ng-click="generalLogin()">
         登录
       </button>

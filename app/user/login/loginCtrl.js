@@ -95,7 +95,7 @@ define(['app'], function (app) {
                   email: $scope.loginUser.email
                 }).then(
                 function (data) {
-                  $rootScope.loadingFactory.hide();
+                  $rootScope.LoadingFactory.hide();
                   $rootScope.$log.debug("验证码发送成功!" + data);
                   $scope.auth.ordinaryToken = data.result.ordinaryToken;
                   $scope.goStep2(); //转向第二步
@@ -137,7 +137,7 @@ define(['app'], function (app) {
             if(!$scope.user.img){
               $scope.user.img = "public/img/ionic.png";
             }
-            $scope.user.userName = $scope.loginUser.userName;
+            $scope.user.userName = $scope.loginUser.email;
             $rootScope.CacheFactory.put("NB-USER",$scope.user);
             $rootScope.$state.go("tabs.user");//登录成功转向用户中心
             $rootScope.LoadingFactory.hide();
